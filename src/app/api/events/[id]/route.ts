@@ -5,8 +5,9 @@ export const runtime = 'edge';
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   const { env } = getRequestContext();
   const db = (env as unknown as CloudflareEnv).DB;
 
@@ -30,7 +31,7 @@ export async function PUT(
       color,
       notify_before ?? 0,
       now,
-      params.id
+      id
     )
     .run();
 
@@ -39,12 +40,13 @@ export async function PUT(
 
 export async function DELETE(
   _request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   const { env } = getRequestContext();
   const db = (env as unknown as CloudflareEnv).DB;
 
-  await db.prepare('DELETE FROM events WHERE id = ?').bind(params.id).run();
+  await db.prepare('DELETE FROM events WHERE id = ?').bind(id).run();
 
   return NextResponse.json({ success: true });
 }
