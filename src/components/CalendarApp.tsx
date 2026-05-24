@@ -26,7 +26,7 @@ export default function CalendarApp({ userEmail }: Props) {
     setLoading(true);
     try {
       const res = await fetch('/api/events');
-      const data = await res.json();
+      const data = await res.json() as { events?: CalendarEvent[] };
       setEvents(data.events ?? []);
     } finally {
       setLoading(false);
