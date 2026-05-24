@@ -6,4 +6,4 @@ pages_build_output_dir = ".vercel/output/static"
 [[d1_databases]]
 binding = "DB"
 database_name = "schedule-db"
-database_id = "REPLACE_WITH_YOUR_D1_ID"
+database_id = "02f839f2-22b4-4da1-aeac-419af3ed826f"
