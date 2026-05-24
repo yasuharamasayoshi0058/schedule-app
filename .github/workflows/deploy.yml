@@ -30,7 +30,7 @@ jobs:
           npm --version
 
       - name: Build
-        run: npm run build
+        run: npm run pages:build
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/pages-action@1
